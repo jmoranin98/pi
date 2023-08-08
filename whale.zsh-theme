@@ -1,11 +1,16 @@
 PROMPT='%{$fg_bold[cyan]%}$(get_pwd)%{$reset_color%} $(git_prompt_info)
-${prompt_suffix}'
+%{$fg[cyan]%}$(get_hostname)%{$reset_color%}${prompt_suffix}'
 
 local prompt_suffix="🐋 "
 
 BRANCH="⎇"
 
-# by shashankmehta (https://github.com/shashankmehta)
+function get_hostname(){
+  if [[ $ZSH_SHOW_HOSTNAME = true ]]; then
+    echo '%m '
+  fi
+}
+
 function get_pwd(){
   git_root=$PWD
   while [[ $git_root != / && ! -e $git_root/.git ]]; do
